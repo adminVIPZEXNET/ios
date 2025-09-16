@@ -34,7 +34,6 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
         }
 
         /* صفحه اسپلش با انیمیشن تایپ */
@@ -181,7 +180,7 @@
         .btn-outline {
             background-color: transparent;
             border: 1px solid var(--text-light);
-            color: var(--text-light);
+            color: var(--text-light;
         }
 
         .btn-outline:hover {
@@ -306,54 +305,6 @@
             resize: vertical;
         }
 
-        .file-upload {
-            border: 2px dashed var(--border-color);
-            padding: 1.5rem;
-            text-align: center;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: border-color 0.3s;
-            position: relative;
-        }
-
-        .file-upload:hover {
-            border-color: var(--primary-blue);
-        }
-
-        .file-upload i {
-            font-size: 2rem;
-            color: var(--primary-blue);
-            margin-bottom: 0.5rem;
-        }
-
-        .file-upload input {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .file-preview {
-            margin-top: 1rem;
-            text-align: center;
-        }
-
-        .file-preview img {
-            max-width: 100%;
-            max-height: 200px;
-            border-radius: 4px;
-            margin-top: 0.5rem;
-        }
-
-        .file-name {
-            margin-top: 0.5rem;
-            font-size: 0.9rem;
-            color: var(--primary-blue);
-        }
-
         .admin-panel {
             background-color: var(--card-bg);
             border-radius: 8px;
@@ -382,44 +333,6 @@
         .admin-app-actions {
             display: flex;
             gap: 0.5rem;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 2rem;
-            width: 90%;
-            max-width: 500px;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-dark);
         }
 
         footer {
@@ -455,29 +368,6 @@
             font-size: 3rem;
             color: var(--primary-blue);
             margin-bottom: 1rem;
-        }
-
-        .banner {
-            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .banner h3 {
-            margin-bottom: 0.5rem;
-        }
-
-        .banner p {
-            margin-bottom: 1rem;
-        }
-
-        .banner-image {
-            max-width: 100%;
-            border-radius: 8px;
-            margin-top: 1rem;
         }
 
         .team-section {
@@ -527,22 +417,6 @@
             text-decoration: underline;
         }
 
-        .add-banner-form {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-top: 2rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .admin-settings-form {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-top: 2rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
         .featured-badge {
             position: absolute;
             top: 10px;
@@ -556,17 +430,6 @@
 
         .app-card {
             position: relative;
-        }
-
-        .featured-banner {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: var(--secondary-green);
-            color: white;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
         }
 
         @media (max-width: 768px) {
@@ -661,10 +524,6 @@
         
         <main>
             <section id="homeSection">
-                <div id="bannerContainer">
-                    <!-- بنرها توسط JavaScript اضافه خواهند شد -->
-                </div>
-                
                 <h2 class="section-title">برنامه‌های منتخب</h2>
                 
                 <div class="apps-grid" id="appsGrid">
@@ -784,23 +643,13 @@
                     </div>
                     
                     <div class="form-group">
-                        <label>عکس برنامه</label>
-                        <div class="file-upload" id="imageUpload">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <p>برای آپلود عکس برنامه کلیک کنید</p>
-                            <input type="file" id="appImage" accept="image/*">
-                        </div>
-                        <div class="file-preview" id="imagePreview"></div>
+                        <label for="appImageUrl">لینک عکس برنامه</label>
+                        <input type="text" id="appImageUrl" class="form-control" placeholder="https://example.com/image.jpg">
                     </div>
                     
                     <div class="form-group">
-                        <label>فایل برنامه</label>
-                        <div class="file-upload" id="fileUpload">
-                            <i class="fas fa-file-upload"></i>
-                            <p>برای آپلود فایل برنامه کلیک کنید</p>
-                            <input type="file" id="appFile" accept=".apk,.ipa">
-                        </div>
-                        <div class="file-preview" id="filePreview"></div>
+                        <label for="appDownloadUrl">لینک دانلود برنامه</label>
+                        <input type="text" id="appDownloadUrl" class="form-control" placeholder="https://example.com/app.apk">
                     </div>
                     
                     <button class="btn btn-primary" style="width: 100%;" id="submitApp">
@@ -851,52 +700,6 @@
                         </div>
                     </div>
                     
-                    <div class="add-banner-form">
-                        <h3 style="margin-bottom: 1rem; color: var(--dark-blue);">مدیریت بنرها</h3>
-                        
-                        <div class="form-group">
-                            <label for="bannerTitle">عنوان بنر</label>
-                            <input type="text" id="bannerTitle" class="form-control" placeholder="عنوان بنر">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="bannerDescription">توضیحات بنر</label>
-                            <textarea id="bannerDescription" class="form-control" placeholder="توضیحات بنر"></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>عکس بنر</label>
-                            <div class="file-upload" id="bannerImageUpload">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                                <p>برای آپلود عکس بنر کلیک کنید</p>
-                                <input type="file" id="bannerImage" accept="image/*">
-                            </div>
-                            <div class="file-preview" id="bannerImagePreview"></div>
-                        </div>
-                        
-                        <button class="btn btn-primary" style="width: 100%;" id="addBanner">
-                            <i class="fas fa-plus"></i> افزودن بنر
-                        </button>
-                    </div>
-                    
-                    <div class="admin-settings-form">
-                        <h3 style="margin-bottom: 1rem; color: var(--dark-blue);">تنظیمات ادمین</h3>
-                        
-                        <div class="form-group">
-                            <label for="adminNewUsername">نام کاربری جدید</label>
-                            <input type="text" id="adminNewUsername" class="form-control" placeholder="نام کاربری جدید">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="adminNewPassword">رمز عبور جدید</label>
-                            <input type="password" id="adminNewPassword" class="form-control" placeholder="رمز عبور جدید">
-                        </div>
-                        
-                        <button class="btn btn-secondary" style="width: 100%;" id="changeAdminCredentials">
-                            <i class="fas fa-key"></i> تغییر اطلاعات ادمین
-                        </button>
-                    </div>
-                    
                     <div style="margin-top: 2rem; text-align: center;">
                         <button class="btn btn-outline" id="adminLogoutBtn">
                             <i class="fas fa-sign-out-alt"></i> خروج از پنل مدیریت
@@ -934,7 +737,6 @@
                         splashScreen.classList.add('hidden');
                         appContent.style.display = 'block';
                         loadApps(); // بارگذاری برنامه‌ها
-                        loadBanners(); // بارگذاری بنرها
                     }, 1500);
                 }
             }
@@ -943,14 +745,8 @@
             typeText();
             
             // اطلاعات ادمین
-            let ADMIN_USERNAME = localStorage.getItem('adminUsername') || "admin";
-            let ADMIN_PASSWORD = localStorage.getItem('adminPassword') || "admin123";
-            
-            // ذخیره اطلاعات ادمین در localStorage
-            if (!localStorage.getItem('adminUsername')) {
-                localStorage.setItem('adminUsername', ADMIN_USERNAME);
-                localStorage.setItem('adminPassword', ADMIN_PASSWORD);
-            }
+            const ADMIN_USERNAME = "admin";
+            const ADMIN_PASSWORD = "admin123";
             
             // عناصر صفحه
             const homeSection = document.getElementById('homeSection');
@@ -966,7 +762,6 @@
             const allAppsGrid = document.getElementById('allAppsGrid');
             const pendingApps = document.getElementById('pendingApps');
             const approvedApps = document.getElementById('approvedApps');
-            const bannerContainer = document.getElementById('bannerContainer');
             
             // دکمه‌های ناوبری
             const loginBtn = document.getElementById('loginBtn');
@@ -980,16 +775,6 @@
             const doAdminLogin = document.getElementById('doAdminLogin');
             const adminLogoutBtn = document.getElementById('adminLogoutBtn');
             const submitApp = document.getElementById('submitApp');
-            const addBanner = document.getElementById('addBanner');
-            const changeAdminCredentials = document.getElementById('changeAdminCredentials');
-            
-            // مدیریت آپلود فایل
-            const appImage = document.getElementById('appImage');
-            const appFile = document.getElementById('appFile');
-            const bannerImage = document.getElementById('bannerImage');
-            const imagePreview = document.getElementById('imagePreview');
-            const filePreview = document.getElementById('filePreview');
-            const bannerImagePreview = document.getElementById('bannerImagePreview');
             
             // نمایش بخش‌های مختلف
             function showSection(section) {
@@ -1009,6 +794,12 @@
                 // اگر بخش برنامه‌ها نمایش داده شد، همه برنامه‌ها را بارگذاری کن
                 if (section === 'appsSection') {
                     loadAllApps();
+                }
+                
+                // اگر بخش ادمین نمایش داده شد، برنامه‌ها را بارگذاری کن
+                if (section === 'adminSection') {
+                    loadPendingApps();
+                    loadApprovedApps();
                 }
             }
             
@@ -1086,9 +877,9 @@
                                 <button class="btn btn-primary">
                                     <i class="fas fa-info-circle"></i> جزئیات
                                 </button>
-                                <button class="btn btn-secondary">
+                                <a href="${app.downloadUrl}" class="btn btn-secondary" target="_blank">
                                     <i class="fas fa-download"></i> دانلود
-                                </button>
+                                </a>
                             </div>
                         </div>
                     `;
@@ -1128,37 +919,14 @@
                                 <button class="btn btn-primary">
                                     <i class="fas fa-info-circle"></i> جزئیات
                                 </button>
-                                <button class="btn btn-secondary">
+                                <a href="${app.downloadUrl}" class="btn btn-secondary" target="_blank">
                                     <i class="fas fa-download"></i> دانلود
-                                </button>
+                                </a>
                             </div>
                         </div>
                     `;
                     allAppsGrid.appendChild(appCard);
                 });
-            }
-            
-            // بارگذاری بنرها
-            function loadBanners() {
-                const banners = JSON.parse(localStorage.getItem('banners') || '[]');
-                bannerContainer.innerHTML = '';
-                
-                if (banners.length === 0) {
-                    return;
-                }
-                
-                // نمایش آخرین بنر اضافه شده
-                const banner = banners[banners.length - 1];
-                
-                const bannerElement = document.createElement('div');
-                bannerElement.className = 'banner';
-                bannerElement.innerHTML = `
-                    <h3>${banner.title}</h3>
-                    <p>${banner.description}</p>
-                    <img src="${banner.image}" alt="${banner.title}" class="banner-image">
-                `;
-                
-                bannerContainer.appendChild(bannerElement);
             }
             
             // بارگذاری برنامه‌های در انتظار تایید برای ادمین
@@ -1297,7 +1065,7 @@
                 
                 loadPendingApps();
                 
-                alert('برنامه با успеیت رد شد');
+                alert('برنامه با موفقیت رد شد');
             }
             
             // تغییر وضعیت ویژه برنامه
@@ -1336,182 +1104,46 @@
                 alert('برنامه با موفقیت حذف شد');
             }
             
-            // افزودن بنر توسط ادمین
-            addBanner.addEventListener('click', function() {
-                const title = document.getElementById('bannerTitle').value;
-                const description = document.getElementById('bannerDescription').value;
-                const imageFile = bannerImage.files[0];
-                
-                if (!title || !description || !imageFile) {
-                    alert('لطفاً تمام فیلدهای ضروری را پر کنید');
-                    return;
-                }
-                
-                // خواندن عکس به صورت Data URL
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const bannerData = {
-                        id: Date.now().toString(),
-                        title,
-                        description,
-                        image: e.target.result
-                    };
-                    
-                    // ذخیره بنر
-                    const banners = JSON.parse(localStorage.getItem('banners') || '[]');
-                    banners.push(bannerData);
-                    localStorage.setItem('banners', JSON.stringify(banners));
-                    
-                    // ریست فرم
-                    document.getElementById('bannerTitle').value = '';
-                    document.getElementById('bannerDescription').value = '';
-                    bannerImage.value = '';
-                    bannerImagePreview.innerHTML = '';
-                    
-                    // نمایش پیام موفقیت
-                    alert('بنر با موفقیت اضافه شد');
-                    loadBanners();
-                };
-                reader.readAsDataURL(imageFile);
-            });
-            
-            // تغییر اطلاعات ادمین
-            changeAdminCredentials.addEventListener('click', function() {
-                const newUsername = document.getElementById('adminNewUsername').value;
-                const newPassword = document.getElementById('adminNewPassword').value;
-                
-                if (newUsername) {
-                    ADMIN_USERNAME = newUsername;
-                    localStorage.setItem('adminUsername', newUsername);
-                }
-                
-                if (newPassword) {
-                    ADMIN_PASSWORD = newPassword;
-                    localStorage.setItem('adminPassword', newPassword);
-                }
-                
-                if (newUsername || newPassword) {
-                    document.getElementById('adminNewUsername').value = '';
-                    document.getElementById('adminNewPassword').value = '';
-                    alert('اطلاعات ادمین با موفقیت تغییر کرد');
-                } else {
-                    alert('لطفاً حداقل یکی از فیلدها را پر کنید');
-                }
-            });
-            
-            // نمایش وضعیت کاربر در نوار بالایی
-            function updateUserStatus() {
-                const userEmail = localStorage.getItem('userEmail');
-                const userName = localStorage.getItem('userName');
-                
-                if (userEmail) {
-                    userActions.innerHTML = `
-                        <span class="user-welcome">خوش آمدید ${userName}</span>
-                        <button class="btn btn-outline" id="logoutBtn">
-                            <i class="fas fa-sign-out-alt"></i> خروج
-                        </button>
-                        <button class="btn btn-secondary" id="submitAppBtn">
-                            <i class="fas fa-plus"></i> ارسال برنامه
-                        </button>
-                        <button class="btn btn-admin" id="adminBtn">
-                            <i class="fas fa-cog"></i> پنل ادمین
-                        </button>
-                    `;
-                    
-                    document.getElementById('logoutBtn').addEventListener('click', logout);
-                    document.getElementById('submitAppBtn').addEventListener('click', () => showSection('submitAppSection'));
-                    document.getElementById('adminBtn').addEventListener('click', () => showSection('adminLoginSection'));
-                }
-            }
-            
-            // پیش‌نمایش عکس آپلود شده
-            appImage.addEventListener('change', function() {
-                const file = this.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        imagePreview.innerHTML = `
-                            <img src="${e.target.result}" alt="Preview">
-                            <div class="file-name">${file.name}</div>
-                        `;
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-            
-            // پیش‌نمایش فایل آپلود شده
-            appFile.addEventListener('change', function() {
-                const file = this.files[0];
-                if (file) {
-                    filePreview.innerHTML = `
-                        <i class="fas fa-file" style="font-size: 3rem; color: var(--primary-blue);"></i>
-                        <div class="file-name">${file.name}</div>
-                    `;
-                }
-            });
-            
-            // پیش‌نمایش عکس بنر
-            bannerImage.addEventListener('change', function() {
-                const file = this.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        bannerImagePreview.innerHTML = `
-                            <img src="${e.target.result}" alt="Preview">
-                            <div class="file-name">${file.name}</div>
-                        `;
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-            
             // ارسال برنامه جدید
             submitApp.addEventListener('click', function() {
                 const name = document.getElementById('appName').value;
                 const description = document.getElementById('appDescription').value;
                 const version = document.getElementById('appVersion').value;
-                const imageFile = appImage.files[0];
-                const appFile = document.getElementById('appFile').files[0];
+                const imageUrl = document.getElementById('appImageUrl').value;
+                const downloadUrl = document.getElementById('appDownloadUrl').value;
                 
-                if (!name || !description || !version || !imageFile || !appFile) {
-                    alert('لطفاً تمام فیل드های ضروری را پر کنید');
+                if (!name || !description || !version || !imageUrl || !downloadUrl) {
+                    alert('لطفاً تمام فیلدهای ضروری را پر کنید');
                     return;
                 }
                 
-                // خواندن عکس به صورت Data URL
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const appData = {
-                        id: Date.now().toString(),
-                        name,
-                        description,
-                        version,
-                        image: e.target.result,
-                        fileName: appFile.name,
-                        submittedBy: localStorage.getItem('userName') || 'کاربر ناشناس',
-                        date: new Date().toLocaleDateString('fa-IR'),
-                        featured: false
-                    };
-                    
-                    // ذخیره برنامه در لیست انتظار
-                    const pendingApps = JSON.parse(localStorage.getItem('pendingApps') || '[]');
-                    pendingApps.push(appData);
-                    localStorage.setItem('pendingApps', JSON.stringify(pendingApps));
-                    
-                    // ریست فرم
-                    document.getElementById('appName').value = '';
-                    document.getElementById('appDescription').value = '';
-                    document.getElementById('appVersion').value = '1.0.0';
-                    appImage.value = '';
-                    document.getElementById('appFile').value = '';
-                    imagePreview.innerHTML = '';
-                    filePreview.innerHTML = '';
-                    
-                    // نمایش پیام موفقیت
-                    alert('برنامه با موفقیت ارسال شد و در انتظار تایید ادمین است');
-                    showSection('homeSection');
+                const appData = {
+                    id: Date.now().toString(),
+                    name,
+                    description,
+                    version,
+                    image: imageUrl,
+                    downloadUrl: downloadUrl,
+                    submittedBy: localStorage.getItem('userName') || 'کاربر ناشناس',
+                    date: new Date().toLocaleDateString('fa-IR'),
+                    featured: false
                 };
-                reader.readAsDataURL(imageFile);
+                
+                // ذخیره برنامه در لیست انتظار
+                const pendingApps = JSON.parse(localStorage.getItem('pendingApps') || '[]');
+                pendingApps.push(appData);
+                localStorage.setItem('pendingApps', JSON.stringify(pendingApps));
+                
+                // ریست فرم
+                document.getElementById('appName').value = '';
+                document.getElementById('appDescription').value = '';
+                document.getElementById('appVersion').value = '1.0.0';
+                document.getElementById('appImageUrl').value = '';
+                document.getElementById('appDownloadUrl').value = '';
+                
+                // نمایش پیام موفقیت
+                alert('برنامه با موفقیت ارسال شد و در انتظار تایید ادمین است');
+                showSection('homeSection');
             });
             
             // عملیات ورود
@@ -1579,8 +1211,6 @@
                 if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
                     // نمایش پنل ادمین
                     showSection('adminSection');
-                    loadPendingApps();
-                    loadApprovedApps();
                 } else {
                     alert('نام کاربری یا رمز عبور ادمین اشتباه است');
                 }
@@ -1590,6 +1220,31 @@
             adminLogoutBtn.addEventListener('click', function() {
                 showSection('homeSection');
             });
+            
+            // نمایش وضعیت کاربر در نوار بالایی
+            function updateUserStatus() {
+                const userEmail = localStorage.getItem('userEmail');
+                const userName = localStorage.getItem('userName');
+                
+                if (userEmail) {
+                    userActions.innerHTML = `
+                        <span class="user-welcome">خوش آمدید ${userName}</span>
+                        <button class="btn btn-outline" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i> خروج
+                        </button>
+                        <button class="btn btn-secondary" id="submitAppBtn">
+                            <i class="fas fa-plus"></i> ارسال برنامه
+                        </button>
+                        <button class="btn btn-admin" id="adminBtn">
+                            <i class="fas fa-cog"></i> پنل ادمین
+                        </button>
+                    `;
+                    
+                    document.getElementById('logoutBtn').addEventListener('click', logout);
+                    document.getElementById('submitAppBtn').addEventListener('click', () => showSection('submitAppSection'));
+                    document.getElementById('adminBtn').addEventListener('click', () => showSection('adminLoginSection'));
+                }
+            }
             
             // عملیات خروج
             function logout() {
