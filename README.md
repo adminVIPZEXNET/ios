@@ -2,7 +2,7 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>میکس پلی - دنیایی از برنامه ها</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -26,6 +26,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -34,6 +35,8 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
+            font-size: 14px;
         }
 
         /* صفحه اسپلش با انیمیشن تایپ */
@@ -65,20 +68,20 @@
         }
 
         .logo i {
-            font-size: 4rem;
+            font-size: 3rem;
             color: var(--text-light);
         }
 
         .logo h1 {
-            font-size: 3.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
             color: var(--text-light);
         }
 
         .typing-animation {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: var(--text-light);
-            height: 2.5rem;
+            height: 2rem;
             overflow: hidden;
             border-right: 2px solid var(--text-light);
             white-space: nowrap;
@@ -95,13 +98,14 @@
         header {
             background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
             color: var(--text-light);
-            padding: 1rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 0.8rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -110,30 +114,66 @@
         .app-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .app-logo h1 {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: 700;
         }
 
         .app-logo i {
-            font-size: 2rem;
+            font-size: 1.6rem;
+        }
+
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-light);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 70%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
+            z-index: 200;
+            transition: right 0.3s ease;
+            padding: 2rem 1rem;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        nav.active {
+            right: 0;
         }
 
         nav ul {
-            display: flex;
             list-style: none;
-            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        nav li {
+            margin-bottom: 1.5rem;
         }
 
         nav a {
             color: var(--text-light);
             text-decoration: none;
             font-weight: 500;
-            padding: 0.5rem;
+            padding: 0.8rem;
             border-radius: 4px;
+            display: block;
             transition: background-color 0.3s;
         }
 
@@ -141,14 +181,23 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
 
+        .close-menu {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
         .user-actions {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
             align-items: center;
         }
 
         .btn {
-            padding: 0.6rem 1.2rem;
+            padding: 0.6rem 1rem;
             border-radius: 4px;
             border: none;
             cursor: pointer;
@@ -156,7 +205,8 @@
             transition: all 0.3s;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
+            font-size: 0.9rem;
         }
 
         .btn-primary {
@@ -180,7 +230,7 @@
         .btn-outline {
             background-color: transparent;
             border: 1px solid var(--text-light);
-            color: var(--text-light;
+            color: var(--text-light);
         }
 
         .btn-outline:hover {
@@ -198,24 +248,22 @@
 
         main {
             flex: 1;
-            padding: 2rem 1rem;
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 1rem;
             width: 100%;
         }
 
         .section-title {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: var(--dark-blue);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             padding-bottom: 0.5rem;
             border-bottom: 2px solid var(--primary-blue);
         }
 
         .apps-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
             margin-bottom: 2rem;
         }
 
@@ -223,16 +271,16 @@
             background-color: var(--card-bg);
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s;
         }
 
         .app-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
 
         .app-image {
-            height: 160px;
+            height: 140px;
             overflow: hidden;
         }
 
@@ -243,27 +291,27 @@
         }
 
         .app-info {
-            padding: 1rem;
+            padding: 0.8rem;
         }
 
         .app-name {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: var(--dark-blue);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
         .app-version {
             color: var(--primary-blue);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            margin-bottom: 0.4rem;
         }
 
         .app-desc {
             color: var(--text-dark);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            height: 40px;
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+            height: 36px;
             overflow: hidden;
         }
 
@@ -275,21 +323,22 @@
         .form-container {
             background-color: var(--card-bg);
             border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
             margin: 0 auto;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             font-weight: 500;
             color: var(--dark-blue);
+            font-size: 0.9rem;
         }
 
         .form-control {
@@ -297,19 +346,19 @@
             padding: 0.8rem;
             border: 1px solid var(--border-color);
             border-radius: 4px;
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
         textarea.form-control {
-            min-height: 100px;
+            min-height: 80px;
             resize: vertical;
         }
 
         .admin-panel {
             background-color: var(--card-bg);
             border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
 
         .admin-apps {
@@ -319,8 +368,7 @@
 
         .admin-app {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
             padding: 1rem;
             border: 1px solid var(--border-color);
             border-radius: 4px;
@@ -328,44 +376,43 @@
 
         .admin-app-info {
             flex: 1;
+            margin-bottom: 1rem;
         }
 
         .admin-app-actions {
             display: flex;
             gap: 0.5rem;
+            justify-content: flex-end;
         }
 
         footer {
             background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
             color: var(--text-light);
-            padding: 2rem 1rem;
+            padding: 1.5rem 1rem;
             text-align: center;
             margin-top: auto;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
+            font-size: 0.8rem;
         }
 
         .user-welcome {
             color: var(--text-light);
-            margin-right: 1rem;
+            margin-right: 0.8rem;
+            font-size: 0.9rem;
         }
 
         .admin-login-form {
-            max-width: 400px;
+            width: 100%;
             margin: 0 auto;
         }
 
         .empty-state {
             text-align: center;
-            padding: 2rem;
+            padding: 1.5rem;
             color: var(--text-dark);
         }
 
         .empty-state i {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--primary-blue);
             margin-bottom: 1rem;
         }
@@ -373,17 +420,17 @@
         .team-section {
             background-color: var(--card-bg);
             border-radius: 8px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
 
         .team-member {
             display: flex;
             align-items: center;
             gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 1.2rem;
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -394,23 +441,26 @@
         }
 
         .team-member i {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: var(--primary-blue);
         }
 
         .team-info h3 {
             color: var(--dark-blue);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
+            font-size: 1rem;
         }
 
         .team-info p {
             color: var(--text-dark);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
+            font-size: 0.85rem;
         }
 
         .team-info a {
             color: var(--primary-blue);
             text-decoration: none;
+            font-size: 0.85rem;
         }
 
         .team-info a:hover {
@@ -419,62 +469,91 @@
 
         .featured-badge {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 8px;
+            right: 8px;
             background-color: var(--primary-blue);
             color: white;
-            padding: 0.25rem 0.5rem;
+            padding: 0.2rem 0.4rem;
             border-radius: 4px;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
         }
 
         .app-card {
             position: relative;
         }
 
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            nav ul {
-                gap: 0.8rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .user-actions {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .apps-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
+        .banner {
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
 
-            .logo h1 {
-                font-size: 2.5rem;
-            }
+        .banner h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
 
-            .typing-animation {
-                font-size: 1.5rem;
-            }
+        .banner p {
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+        }
 
-            .admin-app {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
+        .banner-image {
+            max-width: 100%;
+            border-radius: 6px;
+            margin-top: 0.8rem;
+        }
 
-            .admin-app-actions {
-                align-self: flex-end;
-            }
+        .admin-settings-form {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
 
-            .team-member {
-                flex-direction: column;
-                text-align: center;
-            }
+        .add-banner-form {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 150;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* استایل اسکرول بار برای موبایل */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--dark-blue);
         }
     </style>
 </head>
@@ -497,13 +576,11 @@
                     <h1>میکس پلی</h1>
                 </div>
                 
-                <nav>
-                    <ul>
-                        <li><a href="#" class="nav-link" data-section="homeSection">خانه</a></li>
-                        <li><a href="#" class="nav-link" data-section="appsSection">برنامه‌ها</a></li>
-                        <li><a href="#" class="nav-link" data-section="aboutSection">درباره ما</a></li>
-                    </ul>
-                </nav>
+                <div class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
                 
                 <div class="user-actions" id="userActions">
                     <button class="btn btn-outline" id="loginBtn">
@@ -512,18 +589,31 @@
                     <button class="btn btn-primary" id="registerBtn">
                         <i class="fas fa-user-plus"></i> ثبت‌نام
                     </button>
-                    <button class="btn btn-secondary" id="submitAppBtn">
-                        <i class="fas fa-plus"></i> ارسال برنامه
-                    </button>
-                    <button class="btn btn-admin" id="adminBtn">
-                        <i class="fas fa-cog"></i> پنل ادمین
-                    </button>
                 </div>
             </div>
         </header>
         
+        <nav id="mainNav">
+            <div class="close-menu" id="closeMenu">
+                <i class="fas fa-times"></i>
+            </div>
+            <ul>
+                <li><a href="#" class="nav-link" data-section="homeSection">خانه</a></li>
+                <li><a href="#" class="nav-link" data-section="appsSection">برنامه‌ها</a></li>
+                <li><a href="#" class="nav-link" data-section="aboutSection">درباره ما</a></li>
+                <li><a href="#" class="nav-link" data-section="submitAppSection">ارسال برنامه</a></li>
+                <li><a href="#" class="nav-link" data-section="adminLoginSection">پنل ادمین</a></li>
+            </ul>
+        </nav>
+        
+        <div class="overlay" id="overlay"></div>
+        
         <main>
             <section id="homeSection">
+                <div id="bannerContainer">
+                    <!-- بنرها توسط JavaScript اضافه خواهند شد -->
+                </div>
+                
                 <h2 class="section-title">برنامه‌های منتخب</h2>
                 
                 <div class="apps-grid" id="appsGrid">
@@ -692,7 +782,7 @@
                         <!-- برنامه‌های در انتظار تایید توسط JavaScript اضافه خواهند شد -->
                     </div>
                     
-                    <div style="margin-top: 2rem;">
+                    <div style="margin-top: 1.5rem;">
                         <h3 style="margin-bottom: 1rem; color: var(--dark-blue);">برنامه‌های تایید شده</h3>
                         
                         <div class="admin-apps" id="approvedApps">
@@ -700,7 +790,48 @@
                         </div>
                     </div>
                     
-                    <div style="margin-top: 2rem; text-align: center;">
+                    <div class="add-banner-form">
+                        <h3 style="margin-bottom: 1rem; color: var(--dark-blue);">مدیریت بنرها</h3>
+                        
+                        <div class="form-group">
+                            <label for="bannerTitle">عنوان بنر</label>
+                            <input type="text" id="bannerTitle" class="form-control" placeholder="عنوان بنر">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bannerDescription">توضیحات بنر</label>
+                            <textarea id="bannerDescription" class="form-control" placeholder="توضیحات بنر"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bannerImageUrl">لینک عکس بنر</label>
+                            <input type="text" id="bannerImageUrl" class="form-control" placeholder="https://example.com/banner.jpg">
+                        </div>
+                        
+                        <button class="btn btn-primary" style="width: 100%;" id="addBanner">
+                            <i class="fas fa-plus"></i> افزودن بنر
+                        </button>
+                    </div>
+                    
+                    <div class="admin-settings-form">
+                        <h3 style="margin-bottom: 1rem; color: var(--dark-blue);">تنظیمات ادمین</h3>
+                        
+                        <div class="form-group">
+                            <label for="adminNewUsername">نام کاربری جدید</label>
+                            <input type="text" id="adminNewUsername" class="form-control" placeholder="نام کاربری جدید">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="adminNewPassword">رمز عبور جدید</label>
+                            <input type="password" id="adminNewPassword" class="form-control" placeholder="رمز عبور جدید">
+                        </div>
+                        
+                        <button class="btn btn-secondary" style="width: 100%;" id="changeAdminCredentials">
+                            <i class="fas fa-key"></i> تغییر اطلاعات ادمین
+                        </button>
+                    </div>
+                    
+                    <div style="margin-top: 1.5rem; text-align: center;">
                         <button class="btn btn-outline" id="adminLogoutBtn">
                             <i class="fas fa-sign-out-alt"></i> خروج از پنل مدیریت
                         </button>
@@ -737,6 +868,7 @@
                         splashScreen.classList.add('hidden');
                         appContent.style.display = 'block';
                         loadApps(); // بارگذاری برنامه‌ها
+                        loadBanners(); // بارگذاری بنرها
                     }, 1500);
                 }
             }
@@ -745,8 +877,14 @@
             typeText();
             
             // اطلاعات ادمین
-            const ADMIN_USERNAME = "admin";
-            const ADMIN_PASSWORD = "admin123";
+            let ADMIN_USERNAME = localStorage.getItem('adminUsername') || "admin";
+            let ADMIN_PASSWORD = localStorage.getItem('adminPassword') || "admin123";
+            
+            // ذخیره اطلاعات ادمین در localStorage
+            if (!localStorage.getItem('adminUsername')) {
+                localStorage.setItem('adminUsername', ADMIN_USERNAME);
+                localStorage.setItem('adminPassword', ADMIN_PASSWORD);
+            }
             
             // عناصر صفحه
             const homeSection = document.getElementById('homeSection');
@@ -762,12 +900,16 @@
             const allAppsGrid = document.getElementById('allAppsGrid');
             const pendingApps = document.getElementById('pendingApps');
             const approvedApps = document.getElementById('approvedApps');
+            const bannerContainer = document.getElementById('bannerContainer');
+            const menuToggle = document.getElementById('menuToggle');
+            const mainNav = document.getElementById('mainNav');
+            const closeMenu = document.getElementById('closeMenu');
+            const overlay = document.getElementById('overlay');
             
             // دکمه‌های ناوبری
             const loginBtn = document.getElementById('loginBtn');
             const registerBtn = document.getElementById('registerBtn');
             const submitAppBtn = document.getElementById('submitAppBtn');
-            const adminBtn = document.getElementById('adminBtn');
             const goToLogin = document.getElementById('goToLogin');
             const goToRegister = document.getElementById('goToRegister');
             const doLogin = document.getElementById('doLogin');
@@ -775,6 +917,24 @@
             const doAdminLogin = document.getElementById('doAdminLogin');
             const adminLogoutBtn = document.getElementById('adminLogoutBtn');
             const submitApp = document.getElementById('submitApp');
+            const addBanner = document.getElementById('addBanner');
+            const changeAdminCredentials = document.getElementById('changeAdminCredentials');
+            
+            // مدیریت منوی موبایل
+            menuToggle.addEventListener('click', function() {
+                mainNav.classList.add('active');
+                overlay.classList.add('active');
+            });
+            
+            closeMenu.addEventListener('click', function() {
+                mainNav.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+            
+            overlay.addEventListener('click', function() {
+                mainNav.classList.remove('active');
+                overlay.classList.remove('active');
+            });
             
             // نمایش بخش‌های مختلف
             function showSection(section) {
@@ -791,6 +951,10 @@
                 // نمایش بخش مورد نظر
                 document.getElementById(section).style.display = 'block';
                 
+                // بستن منو
+                mainNav.classList.remove('active');
+                overlay.classList.remove('active');
+                
                 // اگر بخش برنامه‌ها نمایش داده شد، همه برنامه‌ها را بارگذاری کن
                 if (section === 'appsSection') {
                     loadAllApps();
@@ -806,18 +970,6 @@
             // رویدادهای کلیک
             loginBtn.addEventListener('click', () => showSection('loginSection'));
             registerBtn.addEventListener('click', () => showSection('registerSection'));
-            submitAppBtn.addEventListener('click', () => {
-                if (isLoggedIn()) {
-                    showSection('submitAppSection');
-                } else {
-                    showSection('loginSection');
-                    alert('لطفاً ابتدا وارد حساب کاربری خود شوید');
-                }
-            });
-            
-            adminBtn.addEventListener('click', () => {
-                showSection('adminLoginSection');
-            });
             
             goToLogin.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -911,7 +1063,7 @@
                         <div class="app-image">
                             <img src="${app.image}" alt="${app.name}">
                         </div>
-                        <div class="app-info">
+                        <div class('app-info')>
                             <h3 class="app-name">${app.name}</h3>
                             <div class="app-version">ورژن: ${app.version}</div>
                             <p class="app-desc">${app.description}</p>
@@ -927,6 +1079,29 @@
                     `;
                     allAppsGrid.appendChild(appCard);
                 });
+            }
+            
+            // بارگذاری بنرها
+            function loadBanners() {
+                const banners = JSON.parse(localStorage.getItem('banners') || '[]');
+                bannerContainer.innerHTML = '';
+                
+                if (banners.length === 0) {
+                    return;
+                }
+                
+                // نمایش آخرین بنر اضافه شده
+                const banner = banners[banners.length - 1];
+                
+                const bannerElement = document.createElement('div');
+                bannerElement.className = 'banner';
+                bannerElement.innerHTML = `
+                    <h3>${banner.title}</h3>
+                    <p>${banner.description}</p>
+                    <img src="${banner.image}" alt="${banner.title}" class="banner-image">
+                `;
+                
+                bannerContainer.appendChild(bannerElement);
             }
             
             // بارگذاری برنامه‌های در انتظار تایید برای ادمین
@@ -1104,6 +1279,63 @@
                 alert('برنامه با موفقیت حذف شد');
             }
             
+            // افزودن بنر توسط ادمین
+            addBanner.addEventListener('click', function() {
+                const title = document.getElementById('bannerTitle').value;
+                const description = document.getElementById('bannerDescription').value;
+                const imageUrl = document.getElementById('bannerImageUrl').value;
+                
+                if (!title || !description || !imageUrl) {
+                    alert('لطفاً تمام فیلدهای ضروری را پر کنید');
+                    return;
+                }
+                
+                const bannerData = {
+                    id: Date.now().toString(),
+                    title,
+                    description,
+                    image: imageUrl
+                };
+                
+                // ذخیره بنر
+                const banners = JSON.parse(localStorage.getItem('banners') || '[]');
+                banners.push(bannerData);
+                localStorage.setItem('banners', JSON.stringify(banners));
+                
+                // ریست فرم
+                document.getElementById('bannerTitle').value = '';
+                document.getElementById('bannerDescription').value = '';
+                document.getElementById('bannerImageUrl').value = '';
+                
+                // نمایش پیام موفقیت
+                alert('بنر با موفقیت اضافه شد');
+                loadBanners();
+            });
+            
+            // تغییر اطلاعات ادمین
+            changeAdminCredentials.addEventListener('click', function() {
+                const newUsername = document.getElementById('adminNewUsername').value;
+                const newPassword = document.getElementById('adminNewPassword').value;
+                
+                if (newUsername) {
+                    ADMIN_USERNAME = newUsername;
+                    localStorage.setItem('adminUsername', newUsername);
+                }
+                
+                if (newPassword) {
+                    ADMIN_PASSWORD = newPassword;
+                    localStorage.setItem('adminPassword', newPassword);
+                }
+                
+                if (newUsername || newPassword) {
+                    document.getElementById('adminNewUsername').value = '';
+                    document.getElementById('adminNewPassword').value = '';
+                    alert('اطلاعات ادمین با موفقیت تغییر کرد');
+                } else {
+                    alert('لطفاً حداقل یکی از فیلدها را پر کنید');
+                }
+            });
+            
             // ارسال برنامه جدید
             submitApp.addEventListener('click', function() {
                 const name = document.getElementById('appName').value;
@@ -1228,21 +1460,13 @@
                 
                 if (userEmail) {
                     userActions.innerHTML = `
-                        <span class="user-welcome">خوش آمدید ${userName}</span>
+                        <span class="user-welcome">${userName}</span>
                         <button class="btn btn-outline" id="logoutBtn">
                             <i class="fas fa-sign-out-alt"></i> خروج
-                        </button>
-                        <button class="btn btn-secondary" id="submitAppBtn">
-                            <i class="fas fa-plus"></i> ارسال برنامه
-                        </button>
-                        <button class="btn btn-admin" id="adminBtn">
-                            <i class="fas fa-cog"></i> پنل ادمین
                         </button>
                     `;
                     
                     document.getElementById('logoutBtn').addEventListener('click', logout);
-                    document.getElementById('submitAppBtn').addEventListener('click', () => showSection('submitAppSection'));
-                    document.getElementById('adminBtn').addEventListener('click', () => showSection('adminLoginSection'));
                 }
             }
             
@@ -1258,22 +1482,11 @@
                     <button class="btn btn-primary" id="registerBtn">
                         <i class="fas fa-user-plus"></i> ثبت‌نام
                     </button>
-                    <button class="btn btn-secondary" id="submitAppBtn">
-                        <i class="fas fa-plus"></i> ارسال برنامه
-                    </button>
-                    <button class="btn btn-admin" id="adminBtn">
-                        <i class="fas fa-cog"></i> پنل ادمین
-                    </button>
                 `;
                 
                 // اضافه کردن مجدد رویدادها به دکمه‌ها
                 document.getElementById('loginBtn').addEventListener('click', () => showSection('loginSection'));
                 document.getElementById('registerBtn').addEventListener('click', () => showSection('registerSection'));
-                document.getElementById('submitAppBtn').addEventListener('click', () => {
-                    showSection('loginSection');
-                    alert('لطفاً ابتدا وارد حساب کاربری خود شوید');
-                });
-                document.getElementById('adminBtn').addEventListener('click', () => showSection('adminLoginSection'));
                 
                 // نمایش صفحه اصلی
                 showSection('homeSection');
