@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -535,6 +535,40 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
+        .admin-settings-form {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .app-card {
+            position: relative;
+        }
+
+        .featured-banner {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--secondary-green);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -845,6 +879,24 @@
                         </button>
                     </div>
                     
+                    <div class="admin-settings-form">
+                        <h3 style="margin-bottom: 1rem; color: var(--dark-blue);">تنظیمات ادمین</h3>
+                        
+                        <div class="form-group">
+                            <label for="adminNewUsername">نام کاربری جدید</label>
+                            <input type="text" id="adminNewUsername" class="form-control" placeholder="نام کاربری جدید">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="adminNewPassword">رمز عبور جدید</label>
+                            <input type="password" id="adminNewPassword" class="form-control" placeholder="رمز عبور جدید">
+                        </div>
+                        
+                        <button class="btn btn-secondary" style="width: 100%;" id="changeAdminCredentials">
+                            <i class="fas fa-key"></i> تغییر اطلاعات ادمین
+                        </button>
+                    </div>
+                    
                     <div style="margin-top: 2rem; text-align: center;">
                         <button class="btn btn-outline" id="adminLogoutBtn">
                             <i class="fas fa-sign-out-alt"></i> خروج از پنل مدیریت
@@ -891,8 +943,14 @@
             typeText();
             
             // اطلاعات ادمین
-            const ADMIN_USERNAME = "admin";
-            const ADMIN_PASSWORD = "admin123";
+            let ADMIN_USERNAME = localStorage.getItem('adminUsername') || "admin";
+            let ADMIN_PASSWORD = localStorage.getItem('adminPassword') || "admin123";
+            
+            // ذخیره اطلاعات ادمین در localStorage
+            if (!localStorage.getItem('adminUsername')) {
+                localStorage.setItem('adminUsername', ADMIN_USERNAME);
+                localStorage.setItem('adminPassword', ADMIN_PASSWORD);
+            }
             
             // عناصر صفحه
             const homeSection = document.getElementById('homeSection');
@@ -923,6 +981,7 @@
             const adminLogoutBtn = document.getElementById('adminLogoutBtn');
             const submitApp = document.getElementById('submitApp');
             const addBanner = document.getElementById('addBanner');
+            const changeAdminCredentials = document.getElementById('changeAdminCredentials');
             
             // مدیریت آپلود فایل
             const appImage = document.getElementById('appImage');
@@ -1015,6 +1074,7 @@
                     const appCard = document.createElement('div');
                     appCard.className = 'app-card';
                     appCard.innerHTML = `
+                        ${app.featured ? '<div class="featured-badge">ویژه</div>' : ''}
                         <div class="app-image">
                             <img src="${app.image}" alt="${app.name}">
                         </div>
@@ -1056,6 +1116,7 @@
                     const appCard = document.createElement('div');
                     appCard.className = 'app-card';
                     appCard.innerHTML = `
+                        ${app.featured ? '<div class="featured-badge">ویژه</div>' : ''}
                         <div class="app-image">
                             <img src="${app.image}" alt="${app.name}">
                         </div>
@@ -1175,6 +1236,9 @@
                             <p>${app.description}</p>
                         </div>
                         <div class="admin-app-actions">
+                            <button class="btn btn-outline feature-btn ${app.featured ? 'btn-primary' : 'btn-outline'}" data-app-id="${app.id}">
+                                <i class="fas fa-star"></i> ${app.featured ? 'غیرویژه' : 'ویژه'}
+                            </button>
                             <button class="btn btn-outline delete-btn" data-app-id="${app.id}" style="color: var(--error);">
                                 <i class="fas fa-trash"></i> حذف
                             </button>
@@ -1183,7 +1247,13 @@
                     approvedApps.appendChild(appElement);
                 });
                 
-                // اضافه کردن رویداد به دکمه‌های حذف
+                // اضافه کردن رویداد به دکمه‌های ویژه و حذف
+                document.querySelectorAll('.feature-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        toggleFeatured(btn.dataset.appId);
+                    });
+                });
+                
                 document.querySelectorAll('.delete-btn').forEach(btn => {
                     btn.addEventListener('click', () => {
                         deleteApp(btn.dataset.appId);
@@ -1227,7 +1297,25 @@
                 
                 loadPendingApps();
                 
-                alert('برنامه با موفقیت رد شد');
+                alert('برنامه با успеیت رد شد');
+            }
+            
+            // تغییر وضعیت ویژه برنامه
+            function toggleFeatured(appId) {
+                const approved = JSON.parse(localStorage.getItem('approvedApps') || '[]');
+                
+                const appIndex = approved.findIndex(app => app.id === appId);
+                if (appIndex === -1) return;
+                
+                approved[appIndex].featured = !approved[appIndex].featured;
+                
+                localStorage.setItem('approvedApps', JSON.stringify(approved));
+                
+                loadApprovedApps();
+                loadApps();
+                loadAllApps();
+                
+                alert('وضعیت برنامه تغییر کرد');
             }
             
             // حذف برنامه توسط ادمین
@@ -1285,6 +1373,30 @@
                     loadBanners();
                 };
                 reader.readAsDataURL(imageFile);
+            });
+            
+            // تغییر اطلاعات ادمین
+            changeAdminCredentials.addEventListener('click', function() {
+                const newUsername = document.getElementById('adminNewUsername').value;
+                const newPassword = document.getElementById('adminNewPassword').value;
+                
+                if (newUsername) {
+                    ADMIN_USERNAME = newUsername;
+                    localStorage.setItem('adminUsername', newUsername);
+                }
+                
+                if (newPassword) {
+                    ADMIN_PASSWORD = newPassword;
+                    localStorage.setItem('adminPassword', newPassword);
+                }
+                
+                if (newUsername || newPassword) {
+                    document.getElementById('adminNewUsername').value = '';
+                    document.getElementById('adminNewPassword').value = '';
+                    alert('اطلاعات ادمین با موفقیت تغییر کرد');
+                } else {
+                    alert('لطفاً حداقل یکی از فیلدها را پر کنید');
+                }
             });
             
             // نمایش وضعیت کاربر در نوار بالایی
@@ -1362,7 +1474,7 @@
                 const appFile = document.getElementById('appFile').files[0];
                 
                 if (!name || !description || !version || !imageFile || !appFile) {
-                    alert('لطفاً تمام فیلدهای ضروری را پر کنید');
+                    alert('لطفاً تمام فیل드های ضروری را پر کنید');
                     return;
                 }
                 
@@ -1377,7 +1489,8 @@
                         image: e.target.result,
                         fileName: appFile.name,
                         submittedBy: localStorage.getItem('userName') || 'کاربر ناشناس',
-                        date: new Date().toLocaleDateString('fa-IR')
+                        date: new Date().toLocaleDateString('fa-IR'),
+                        featured: false
                     };
                     
                     // ذخیره برنامه در لیست انتظار
@@ -1437,8 +1550,17 @@
                 }
                 
                 // ذخیره اطلاعات کاربر در localStorage
+                const userData = {
+                    email,
+                    password,
+                    firstName,
+                    lastName,
+                    registerDate: new Date().toLocaleDateString('fa-IR')
+                };
+                
                 localStorage.setItem('userEmail', email);
                 localStorage.setItem('userName', `${firstName} ${lastName}`);
+                localStorage.setItem('userData', JSON.stringify(userData));
                 
                 // به روزرسانی وضعیت کاربر
                 updateUserStatus();
